@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<div class="p-4 bg-light rounded mb-4">
+    <h2>Вітаємо у нашій онлайн-бібліотеці!</h2>
+    <p>Зараз у каталозі доступно книг: <strong>{{ books_count|default:"0" }}</strong></p>
+</div>
+
+<h3>Список видань</h3>
+<div class="row">
+    {% for book in books %}
+    <div class="col-md-6 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ book.title|upper }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Автор: {{ book.author }} | Жанр: {{ book.genre }}</h6>
+                <p class="card-text">{{ book.description|truncatewords:10 }}</p>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-muted">Каталог наразі порожній.</p>
+    {% endfor %}
+</div>
+{% endblock %}
